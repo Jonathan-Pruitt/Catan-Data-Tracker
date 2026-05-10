@@ -135,9 +135,7 @@
 
             <Expander Name="expPlayers" Background="#FFCCDDCC" HorizontalAlignment="Right" ExpandDirection="Left" Height="Auto" Header="Players" Margin="0,0,0,0" VerticalAlignment="Center" Width="Auto" Expanded="Expander_Expanded" Collapsed="expPlayers_Collapsed" BorderBrush="Black">
                 <Grid Name="grdGameStats" Background="#FFCCEECC">
-                    <Grid.RowDefinitions>
 
-                    </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="15"/>
                         <ColumnDefinition Width="*"/>

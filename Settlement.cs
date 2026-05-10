@@ -1,7 +1,7 @@
     using System;
     
     internal class Settlement {
-        private Location[] _hexes = new Location[3];
+        protected Location[] _hexes = new Location[3];
 
         public Settlement(Location location1, Location location2 = null, Location location3 = null) {
             _hexes[0] = location1;
