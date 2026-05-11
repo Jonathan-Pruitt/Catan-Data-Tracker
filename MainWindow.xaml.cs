@@ -1,4 +1,4 @@
-﻿using CatanTrackV2;
+﻿using CatanCompanion;
 using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
@@ -21,14 +21,11 @@ using System.Windows.Shapes;
 using System.Windows.Threading;
 using static System.Net.Mime.MediaTypeNames;
 
-namespace CatanTracker {
+namespace CatanCompanion {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
     public partial class MainWindow:Window {
-
-        //UPDATE VERSION INFORMATION HERE
-        string version = "v2.5";
         
         #region CLASS FIELDS
         bool isCatan = false;
@@ -67,8 +64,8 @@ namespace CatanTracker {
             
             InitializeComponent();
             
-            //DISPLAY VERSION IN WINDOW
-            this.Title = $"Catan Tracker {version}";
+            // SET TITLE IN WINDOW
+            this.Title = "Catan Companion";
             
             Color buttonColor = new Color();
             buttonColor.A = 0xFF;

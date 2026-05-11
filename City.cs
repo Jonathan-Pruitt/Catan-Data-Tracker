@@ -1,5 +1,3 @@
-using System;
-
 internal class City : Settlement {
 
         public City(Settlement settlement) 

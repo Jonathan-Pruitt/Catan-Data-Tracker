@@ -1,11 +1,4 @@
-﻿using CatanTracker;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace CatanTrackV2 {
+﻿namespace CatanCompanion {
     internal class Round {
         //LOG EACH PLAYERS VIC POINTS PER ROUND, WHO IS LONGEST/LARGEST, TOTAL RESOURCES EARNED
 

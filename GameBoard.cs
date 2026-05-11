@@ -1,16 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Net.Http.Headers;
-using System.Resources;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Threading;
-using System.Xaml.Schema;
-using CatanTrackV2;
+﻿using System.Diagnostics;
 
-namespace CatanTracker {
+namespace CatanCompanion {
     internal class GameBoard {
         private int _gameType = 0; //0-Standard ; 1- Seafarers
 
