@@ -12,4 +12,26 @@
     <EnableWindowsTargeting>true</EnableWindowsTargeting>
   </PropertyGroup>
 
+  <ItemGroup>
+    <None Remove="assets\images\brick.jpg" />
+    <None Remove="assets\images\catan.jpg" />
+    <None Remove="assets\images\gold.jpg" />
+    <None Remove="assets\images\ore.jpg" />
+    <None Remove="assets\images\seafarers.jpg" />
+    <None Remove="assets\images\sheep.jpg" />
+    <None Remove="assets\images\wheat.jpg" />
+    <None Remove="assets\images\wood.jpg" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="assets\images\catan.jpg" />
+    <Resource Include="assets\images\seafarers.jpg" />
+    <Resource Include="assets\images\brick.jpg" />
+    <Resource Include="assets\images\ore.jpg" />
+    <Resource Include="assets\images\sheep.jpg" />
+    <Resource Include="assets\images\wheat.jpg" />
+    <Resource Include="assets\images\wood.jpg" />
+    <Resource Include="assets\images\gold.jpg" />
+  </ItemGroup>
+
 </Project>

@@ -20,20 +20,20 @@
                 </Grid.ColumnDefinitions>
 
                 <Button Name="btnCatan" Click="btnGameSelect_Click">
-                    <Image Source="/catan.jpg"></Image>
+                    <Image Source="assets/images/catan.jpg"></Image>
                 </Button>
                 <Button Name="btnSeafarers" Grid.Column="1" Click="btnGameSelect_Click">
-                    <Image Source="/seafarers.jpg"></Image>
+                    <Image Source="assets/images/seafarers.jpg"></Image>
                 </Button>
             </Grid>
         </Grid>
         <Grid Name="viewBoardSetup" Visibility="Collapsed">
-            <Image HorizontalAlignment="Left" Height="100" Margin="50,115,0,0" VerticalAlignment="Top" Width="72" Source="/brick.jpg"/>
-            <Image HorizontalAlignment="Left" Height="100" Margin="50,230,0,0" VerticalAlignment="Top" Width="70" Source="/ore.jpg"/>
-            <Image HorizontalAlignment="Left" Height="100" Margin="50,330,0,0" VerticalAlignment="Top" Width="70" Source="/sheep.jpg"/>
-            <Image HorizontalAlignment="Left" Height="100" Margin="400,115,0,0" VerticalAlignment="Top" Width="70" Source="/wheat.jpg"/>
-            <Image HorizontalAlignment="Left" Height="100" Margin="400,230,0,0" VerticalAlignment="Top" Width="70" Source="/wood.jpg"/>
-            <Image Name="imgGold" HorizontalAlignment="Left" Height="100" Margin="386,330,0,0" VerticalAlignment="Top" Width="100" Source="/gold.jpg"/>
+            <Image HorizontalAlignment="Left" Height="100" Margin="50,115,0,0" VerticalAlignment="Top" Width="72" Source="assets/images/brick.jpg"/>
+            <Image HorizontalAlignment="Left" Height="100" Margin="50,230,0,0" VerticalAlignment="Top" Width="70" Source="assets/images/ore.jpg"/>
+            <Image HorizontalAlignment="Left" Height="100" Margin="50,330,0,0" VerticalAlignment="Top" Width="70" Source="assets/images/sheep.jpg"/>
+            <Image HorizontalAlignment="Left" Height="100" Margin="400,115,0,0" VerticalAlignment="Top" Width="70" Source="assets/images/wheat.jpg"/>
+            <Image HorizontalAlignment="Left" Height="100" Margin="400,230,0,0" VerticalAlignment="Top" Width="70" Source="assets/images/wood.jpg"/>
+            <Image Name="imgGold" HorizontalAlignment="Left" Height="100" Margin="386,330,0,0" VerticalAlignment="Top" Width="100" Source="assets/images/gold.jpg"/>
             <TextBox Name="setupBrick" HorizontalAlignment="Left" Margin="130,145,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="239" Height="30" FontFamily="Consolas" FontSize="22"/>
             <TextBox Name="setupOre" HorizontalAlignment="Left" Margin="130,265,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="239" Height="30" FontFamily="Consolas" FontSize="22"/>
             <TextBox Name="setupSheep" HorizontalAlignment="Left" Margin="130,370,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="239" Height="30" FontFamily="Consolas" FontSize="22"/>
