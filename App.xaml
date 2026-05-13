@@ -18,22 +18,36 @@
             <Setter Property="BorderBrush" Value="DimGray" />
             <Setter Property="BorderThickness" Value="0,0,0,1" />
         </Style>
+        <Style TargetType="TextBox">
+            <Setter Property="Padding" Value="4" />
+            <Setter Property="Margin" Value="4, 0" />
+        </Style>
         <Style TargetType="TextBlock">
             <Setter Property="FontSize" Value="12"/>
+            <Setter Property="Margin"  Value="4,0"/>
+            <Setter Property="Padding" Value="4,0"/>
         </Style>
-        <Style TargetType="TextBlock" x:Key="XLText">
+        <Style TargetType="TextBlock" x:Key="XLText" BasedOn="{StaticResource {x:Type TextBlock}}">
             <Setter Property="FontSize" Value="20"/>
         </Style>
-        <Style TargetType="TextBlock" x:Key="LText">
+        <Style TargetType="TextBlock" x:Key="LText" BasedOn="{StaticResource {x:Type TextBlock}}">
             <Setter Property="FontSize" Value="16"/>
         </Style>
         <Style TargetType="TextBlock" x:Key="Header" BasedOn="{StaticResource XLText}">
             <Setter Property="FontWeight" Value="Bold"/>
         </Style>
-        <Style TargetType="TextBlock" x:Key="Info">
+        <Style TargetType="TextBlock" x:Key="Info" BasedOn="{StaticResource {x:Type TextBlock}}">
             <Setter Property="FontSize" Value="10"/>
             <Setter Property="FontStyle" Value="Italic"/>
             <Setter Property="Foreground" Value="#666666"/>
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding RelativeSource={RelativeSource Self}, Path=Text}"  Value="">
+                    <Setter Property="Visibility" Value="Collapsed" />
+                </DataTrigger>
+                <DataTrigger Binding="{Binding RelativeSource={RelativeSource Self}, Path=Text}"  Value="x:Null">
+                    <Setter Property="Visibility" Value="Collapsed" />
+                </DataTrigger>
+            </Style.Triggers>
         </Style>
     </Application.Resources>
 </Application>

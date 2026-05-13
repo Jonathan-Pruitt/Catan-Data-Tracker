@@ -64,8 +64,6 @@ namespace CatanCompanion {
             
             InitializeComponent();
             
-            // SET TITLE IN WINDOW
-            this.Title = "Catan Companion";
             
             Color buttonColor = new Color();
             buttonColor.A = 0xFF;

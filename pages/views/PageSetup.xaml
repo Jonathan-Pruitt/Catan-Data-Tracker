@@ -25,8 +25,8 @@
         <partials:InputAndList 
             UCKey="players"
             ListSubmitted="InputAndList_DataSubmitted" 
-            Request="Type the name of each player" 
-            Info="Press &lt;ENTER> to confirm"
+            Request="Type the name of each player. Press &lt;ENTER> to confirm" 
+            Info="The order of names should reflect the turn order"
             BoxMinWidth="64"/>
         <Separator />
         <!-- COLLECT ALL RESOURCE HEX/TOKEN PAIRS -->

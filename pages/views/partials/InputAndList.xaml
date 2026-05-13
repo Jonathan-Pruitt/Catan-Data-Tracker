@@ -8,13 +8,13 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <StackPanel Orientation="Vertical">
-        <StackPanel Orientation="Horizontal">
-            <Label Content="{Binding Path=Request, ElementName=RootInputAndList}" />
-            <TextBlock Text="{Binding Path=Info, ElementName=RootInputAndList}" Style="{StaticResource Info}"/>
+        <StackPanel Orientation="Vertical">
+            <TextBlock Text="{Binding Path=Request, ElementName=RootInputAndList}" />
+            <TextBlock Text="{Binding Path=Info, ElementName=RootInputAndList}" Style="{StaticResource Info}" VerticalAlignment="Center" />
         </StackPanel>
         <StackPanel Orientation="Horizontal">
             <TextBox Name="txtbxInputs" MinWidth="150" HorizontalAlignment="Left" KeyUp="txtbxInputs_KeyUp"/>
-            <Button Click="Button_Click">OK</Button>
+            <Button Click="Button_Click">-></Button>
         </StackPanel>
         <StackPanel Name="stkpnlList" Orientation="Horizontal" MinHeight="25">
             <!-- LIST ITEMS POPULATE HERE -->
