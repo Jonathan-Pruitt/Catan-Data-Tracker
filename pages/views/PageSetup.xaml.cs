@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CatanCompanion.pages.views.partials;
+using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Windows;
@@ -19,66 +20,56 @@ namespace CatanCompanion
 
     public partial class PageSetup : Page
     {
-        private string _gameVersion;
+        private string _gameVersion = "Classic";
         private List<string> _playerNames = new List<string>();
 
         public PageSetup()
         {
             InitializeComponent();
-
-        }
-
-        private void AddPlayer()
-        {
-            _playerNames.Add(txtbxPlayer.Text);
-            UpdatePlayersView();
-            txtbxPlayer.Text = "";
-        }
-
-        private void RemovePlayer(object sender, RoutedEventArgs e)
-        {
-            if (sender is DisplayBox boxToDelete)
-            {
-                _playerNames.RemoveAt(boxToDelete.Id);
-            }
-            UpdatePlayersView();
-        }
-
-        private void UpdatePlayersView()
-        {
-            stkpnlPlayers.Children.Clear();
-            DisplayBox[] players = new DisplayBox[_playerNames.Count];
-
-            int index = 0;
-            foreach (string name in _playerNames)
-            {
-                players[index] = new DisplayBox(index);
-                players[index].DisplayValue = name;
-                players[index].MinWidth = 75;
-                players[index].DeleteRequest += RemovePlayer;
-                stkpnlPlayers.Children.Add(players[index]);
-                index++;
-            }
+            cbGameVersion.SelectionChanged += cbGameVersion_SelectionChanged;
         }
 
         private void cbGameVersion_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            // UPDATE SELECTION ON 'PARENT' GAME
-            // DISPLAY OR HIDE 'GOLD' RESOURCE BASED ON VERSION INFO
-        }
-
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            AddPlayer();
-        }
-
-        private void txtbxPlayer_KeyUp(object sender, KeyEventArgs e)
-        {
-            if (e.Key != Key.Enter)
+            // HIDE {GOLD} WHEN 'SEAFARERS' GAME IS NOT SELECTED
+            if (cbGameVersion?.SelectedItem is ComboBoxItem cbitem)
             {
-                return;
+                inlistGold.Visibility = cbitem.Content.ToString() == "Seafarers" ? Visibility.Visible : Visibility.Collapsed;
             }
-            AddPlayer();
+        }
+
+        private void InputAndList_DataSubmitted(object sender, ListSubmittedEventArgs e)
+        {
+            string identifier = e.Key;
+            List<string> collectedData = e.Items;
+
+            switch (identifier)
+            {
+                case "wheat":
+                    // pass collection to game logic
+                    break;
+                case "brick":
+                    // pass collection to game logic
+                    break;
+                case "ore":
+                    // pass collection to game logic
+                    break;
+                case "sheep":
+                    // pass collection to game logic
+                    break;
+                case "wood":
+                    // pass collection to game logic
+                    break;
+                case "gold":
+                    // pass collection to game logic
+                    break;
+                case "players":
+                    // pass collection to game logic
+                    break;
+                default:
+                    MessageBox.Show("Error: No list-logic provided to be returned");
+                    break;
+            }
         }
     }
 }
