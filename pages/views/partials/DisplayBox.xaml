@@ -8,17 +8,6 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Border MinWidth="{Binding Path=MinWidth, ElementName=Root}" BorderBrush="Black" BorderThickness="1" Margin="4, 4">
-        <Grid>
-            <Grid.RowDefinitions>
-                <RowDefinition />
-            </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="Auto"/>
-            </Grid.ColumnDefinitions>
-        
-            <TextBlock Grid.Column="0" Text="{Binding ElementName=Root, Path=DisplayValue}" HorizontalAlignment="Center" Style="{StaticResource LText}"></TextBlock>
-            <Button Grid.Column="1" VerticalAlignment="Top" Click="Button_Click">x</Button>
-        </Grid>
+        <Button Content="{Binding ElementName=Root, Path=DisplayValue}" Grid.Column="1" VerticalAlignment="Top" Click="Button_Click" />
     </Border>
 </UserControl>

@@ -25,8 +25,8 @@ namespace CatanCompanion {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow:Window {
-        
+    public partial class MainWindow : Window {
+
         #region CLASS FIELDS
         bool isCatan = false;
         bool isSeafarers = false;
@@ -60,8 +60,6 @@ namespace CatanCompanion {
         #endregion
         
         public MainWindow() {
-            
-            
             InitializeComponent();
             
             

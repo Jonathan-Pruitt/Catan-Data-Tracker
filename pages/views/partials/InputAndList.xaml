@@ -13,7 +13,7 @@
             <TextBlock Text="{Binding Path=Info, ElementName=RootInputAndList}" Style="{StaticResource Info}" VerticalAlignment="Center" />
         </StackPanel>
         <StackPanel Orientation="Horizontal">
-            <TextBox Name="txtbxInputs" MinWidth="150" HorizontalAlignment="Left" KeyUp="txtbxInputs_KeyUp"/>
+            <TextBox Name="txtbxInputs" MinWidth="150" HorizontalAlignment="Left" KeyDown="txtbxInputs_KeyDown"/>
             <Button Click="Button_Click">-></Button>
         </StackPanel>
         <StackPanel Name="stkpnlList" Orientation="Horizontal" MinHeight="25">

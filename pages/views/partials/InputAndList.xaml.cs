@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Buffers.Text;
 using System.Collections.Generic;
 using System.Text;
 using System.Windows;
@@ -73,9 +74,18 @@ namespace CatanCompanion.pages.views.partials
 
         private void AddItem()
         {
-            _items.Add(txtbxInputs.Text);
-            UpdateListView();
+            // CHECK FOR NULL OR EMPTY
+            if (txtbxInputs.Text == null || !txtbxInputs.Text.Any()) return;
+
+            // SCREEN OUT NULL, MIXED, AND MALFORMED INPUTS
+            string[] response = ScrubInput(txtbxInputs.Text);
             txtbxInputs.Text = "";
+
+            foreach (string s in response)
+            {
+                _items.Add(s);
+            }
+            UpdateListView();
 
             RaiseEvent(new ListSubmittedEventArgs(ListSubmittedEvent, this.UCKey, new List<string>(_items)));
         }
@@ -107,18 +117,40 @@ namespace CatanCompanion.pages.views.partials
             }
         }
 
+        private string[] ScrubInput(string input)
+        {
+            List<string> scrubbedList = new ();
+            string[] stringArray = input.Split(' ', ',');
+
+            foreach (string item in stringArray)
+            {
+                if (int.TryParse(item, out int result))
+                {
+                    // ONLY ADD INTEGERS THAT CONFORM TO [CATAN] TOKENS
+                    if (result >= 2 && result <= 12 && result != 7)
+                    {
+                        scrubbedList.Add(item);
+                    }
+                } else
+                {
+                    scrubbedList.Add(item);
+                }
+            }
+            
+            return scrubbedList.ToArray();
+        }
+
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             AddItem();
         }
 
-        private void txtbxInputs_KeyUp(object sender, KeyEventArgs e)
+        private void txtbxInputs_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.Key != Key.Enter)
+            if (e.Key == Key.Enter)
             {
-                return;
+                AddItem();
             }
-            AddItem();
         }
 
     }// END CLASS

@@ -25,8 +25,8 @@
         <partials:InputAndList 
             UCKey="players"
             ListSubmitted="InputAndList_DataSubmitted" 
-            Request="Type the name of each player. Press &lt;ENTER> to confirm" 
-            Info="The order of names should reflect the turn order"
+            Request="Type the name of each player. The order of names should reflect the turn order" 
+            Info="Press &lt;ENTER> to confirm. &lt;CLICK> to delete"
             BoxMinWidth="64"/>
         <Separator />
         <!-- COLLECT ALL RESOURCE HEX/TOKEN PAIRS -->
@@ -83,7 +83,8 @@
                 Request="Gold" 
                 BoxMinWidth="36"
                 Grid.Row="2"
-                Grid.Column="1"/>
+                Grid.Column="1"
+                Visibility="Collapsed"/>
         </Grid>
     </StackPanel>
 </Page>
