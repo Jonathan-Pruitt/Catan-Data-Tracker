@@ -4,6 +4,17 @@
              xmlns:local="clr-namespace:CatanCompanion"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-         
+        <Style TargetType="Label">
+            <Setter Property="FontSize" Value="12"/>
+        </Style>
+        <Style TargetType="Label" x:Key="Header">
+            <Setter Property="FontSize" Value="20"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+        </Style>
+        <Style TargetType="Label" x:Key="Info">
+            <Setter Property="FontSize" Value="10"/>
+            <Setter Property="FontStyle" Value="Italic"/>
+            <Setter Property="Foreground" Value="#666666"/>
+        </Style>
     </Application.Resources>
 </Application>

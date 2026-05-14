@@ -1,0 +1,34 @@
+﻿<Page x:Class="CatanCompanion.PageSetup"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:CatanCompanion"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="PageSetup">
+
+    <StackPanel Orientation="Vertical">
+
+        <Label Content="Welcome to Catan Companion!" Style="{StaticResource Header}" Padding="5,5,5,0"/>
+        <Label Content="A Settlers of Catan data tracking application" Style="{StaticResource Info}" Padding="5,0,5,5"/>
+        <StackPanel Orientation="Horizontal">
+            <Label Content="Which version of Catan are you playing?"/>
+            <ComboBox Name="cbGameVersion" MinWidth="50" SelectionChanged="cbGameVersion_SelectionChanged">
+                <ComboBoxItem>Classic</ComboBoxItem>
+                <ComboBoxItem>Seafarers</ComboBoxItem>
+            </ComboBox>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal">
+            <Label Content="Type the name of each player."/>
+            <Label Content="Press &lt;ENTER> to confirm" Style="{StaticResource Info}"/>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal">
+            <TextBox Name="txtbxPlayer" MinWidth="150" HorizontalAlignment="Left" KeyUp="txtbxPlayer_KeyUp"/>
+            <Button Click="Button_Click">OK</Button>
+        </StackPanel>
+        <StackPanel Name="stkpnlPlayers" Orientation="Horizontal">
+            <!-- List of Players populates here-->
+        </StackPanel>
+    </StackPanel>
+</Page>
