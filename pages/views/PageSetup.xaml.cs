@@ -20,30 +20,41 @@ namespace CatanCompanion
     public partial class PageSetup : Page
     {
         private string _gameVersion;
-        private LinkedList<string> _playerNames = new LinkedList<string>();
+        //private LinkedList<string> _playerNames = new LinkedList<string>();
+        private List<string> _playerNames = new List<string>();
 
         public PageSetup()
         {
             InitializeComponent();
+
         }
 
         private void AddPlayer()
         {
-            _playerNames.AddLast(txtbxPlayer.Text);
+            _playerNames.Add(txtbxPlayer.Text);
             UpdatePlayersView();
             txtbxPlayer.Text = "";
+        }
+
+        private void RemovePlayer(object sender, PlayerRemovedEventArgs e)
+        {
+            _playerNames.RemoveAt(e.PlayerIndex);
+            UpdatePlayersView();
         }
 
         private void UpdatePlayersView()
         {
             stkpnlPlayers.Children.Clear();
-            Label[] players = new Label[_playerNames.Count];
+            PlayerTag[] players = new PlayerTag[_playerNames.Count];
+            //Label[] players = new Label[_playerNames.Count];
             int index = 0;
             foreach (string name in _playerNames)
             {
-                players[index] = new Label();
-                players[index].Content = name;
+                players[index] = new PlayerTag();
+                players[index].SetPlayerData(index, name);
+                players[index].RemovePlayer += RemovePlayer;
                 stkpnlPlayers.Children.Add(players[index]);
+                index++;
             }
         }
 
