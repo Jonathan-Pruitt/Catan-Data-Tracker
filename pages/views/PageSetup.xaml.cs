@@ -20,7 +20,6 @@ namespace CatanCompanion
     public partial class PageSetup : Page
     {
         private string _gameVersion;
-        //private LinkedList<string> _playerNames = new LinkedList<string>();
         private List<string> _playerNames = new List<string>();
 
         public PageSetup()
@@ -36,40 +35,41 @@ namespace CatanCompanion
             txtbxPlayer.Text = "";
         }
 
-        private void RemovePlayer(object sender, PlayerRemovedEventArgs e)
+        private void RemovePlayer(object sender, RoutedEventArgs e)
         {
-            _playerNames.RemoveAt(e.PlayerIndex);
+            if (sender is DisplayBox boxToDelete)
+            {
+                _playerNames.RemoveAt(boxToDelete.Id);
+            }
             UpdatePlayersView();
         }
 
         private void UpdatePlayersView()
         {
             stkpnlPlayers.Children.Clear();
-            PlayerTag[] players = new PlayerTag[_playerNames.Count];
-            //Label[] players = new Label[_playerNames.Count];
+            DisplayBox[] players = new DisplayBox[_playerNames.Count];
+
             int index = 0;
             foreach (string name in _playerNames)
             {
-                players[index] = new PlayerTag();
-                players[index].SetPlayerData(index, name);
-                players[index].RemovePlayer += RemovePlayer;
+                players[index] = new DisplayBox(index);
+                players[index].Content = name;
+                players[index].MinWidth = 75;
+                players[index].DeleteRequest += RemovePlayer;
                 stkpnlPlayers.Children.Add(players[index]);
                 index++;
             }
-        }
-
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            // RETRIEVE THE PLAYER-NAME FROM txtbxPlayer
-            // ADD NAME TO _playerNames
-            // RENDER UPDATED _playerNames TO stkpPlayers
-            AddPlayer();
         }
 
         private void cbGameVersion_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             // UPDATE SELECTION ON 'PARENT' GAME
             // DISPLAY OR HIDE 'GOLD' RESOURCE BASED ON VERSION INFO
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            AddPlayer();
         }
 
         private void txtbxPlayer_KeyUp(object sender, KeyEventArgs e)
