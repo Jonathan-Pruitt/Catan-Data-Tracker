@@ -34,8 +34,8 @@ namespace CatanCompanion
             remove { RemoveHandler(DeleteRequestEvent, value); }
         }
 
-        public static readonly DependencyProperty ContentProperty =
-            DependencyProperty.Register("Content", typeof(string), typeof(DisplayBox), new PropertyMetadata(string.Empty));
+        public static readonly DependencyProperty DisplayValueProperty =
+            DependencyProperty.Register("DisplayValue", typeof(string), typeof(DisplayBox), new PropertyMetadata(string.Empty));
         
         public static readonly DependencyProperty MinWidthProperty =
             DependencyProperty.Register("MinWidth", typeof(double), typeof(DisplayBox), new PropertyMetadata(25.0));
@@ -46,10 +46,10 @@ namespace CatanCompanion
             private set;
         }
 
-        public string Content
+        public string DisplayValue
         {
-            get => (string)GetValue(ContentProperty);
-            set => SetValue(ContentProperty, value);
+            get => (string)GetValue(DisplayValueProperty);
+            set => SetValue(DisplayValueProperty, value);
         }
 
         public double MinWidth

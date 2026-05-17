@@ -53,7 +53,7 @@ namespace CatanCompanion
             foreach (string name in _playerNames)
             {
                 players[index] = new DisplayBox(index);
-                players[index].Content = name;
+                players[index].DisplayValue = name;
                 players[index].MinWidth = 75;
                 players[index].DeleteRequest += RemovePlayer;
                 stkpnlPlayers.Children.Add(players[index]);

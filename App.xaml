@@ -4,11 +4,30 @@
              xmlns:local="clr-namespace:CatanCompanion"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
+        <Style TargetType="FrameworkElement" x:Key="Container">
+            <Setter Property="Margin" Value="8, 8" />
+        </Style>
+        <Style TargetType="FrameworkElement" x:Key="Y-Buffer">
+            <Setter Property="Margin" Value="0, 8" />
+        </Style>
+        <Style TargetType="Separator">
+            <Setter Property="Margin" Value="0, 8" />
+            <Setter Property="BorderBrush" Value="DimGray" />
+        </Style>
+        <Style TargetType="Border" x:Key="Group" BasedOn="{StaticResource Container}">
+            <Setter Property="BorderBrush" Value="DimGray" />
+            <Setter Property="BorderThickness" Value="0,0,0,1" />
+        </Style>
         <Style TargetType="Label">
             <Setter Property="FontSize" Value="12"/>
         </Style>
-        <Style TargetType="Label" x:Key="Header">
+        <Style TargetType="Label" x:Key="XLText">
             <Setter Property="FontSize" Value="20"/>
+        </Style>
+        <Style TargetType="Label" x:Key="LText">
+            <Setter Property="FontSize" Value="16"/>
+        </Style>
+        <Style TargetType="Label" x:Key="Header" BasedOn="{StaticResource XLText}">
             <Setter Property="FontWeight" Value="Bold"/>
         </Style>
         <Style TargetType="Label" x:Key="Info">

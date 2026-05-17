@@ -8,11 +8,11 @@
       d:DesignHeight="450" d:DesignWidth="800"
       Title="PageSetup">
 
-    <StackPanel Orientation="Vertical">
-
+    <StackPanel Orientation="Vertical" Style="{StaticResource Container}">
         <Label Content="Welcome to Catan Companion!" Style="{StaticResource Header}" Padding="5,5,5,0"/>
         <Label Content="A Settlers of Catan data tracking application" Style="{StaticResource Info}" Padding="5,0,5,5"/>
-        <StackPanel Orientation="Horizontal">
+        <Separator Background="Black" Margin="0, 0, 0, 8"/>
+        <StackPanel Orientation="Horizontal" Style="{StaticResource Y-Buffer}">
             <Label Content="Which version of Catan are you playing?"/>
             <ComboBox Name="cbGameVersion" MinWidth="50" SelectionChanged="cbGameVersion_SelectionChanged">
                 <ComboBoxItem>Classic</ComboBoxItem>
@@ -30,5 +30,6 @@
         <StackPanel Name="stkpnlPlayers" Orientation="Horizontal">
             <!-- List of Players populates here-->
         </StackPanel>
+        <Separator />
     </StackPanel>
 </Page>
