@@ -29,10 +29,11 @@ Here is a list of all of the data points tracked by this release:
 
 ### How to install/run
   1) **Click on Releases**: Select the release you want to download.
-  2) **Download the App**: Scroll down to the Assets section at the bottom of this release page and click on CatanCompanion_v1.0.0-rc1.zip to download it.
+  2) **Download the App**: Scroll down to the Assets section at the bottom of this release page and click on CatanCompanion*.zip to download it.
   3) **Extract the Files**: Locate the downloaded .zip file on your PC, right-click it, and select Extract All... to unzip it to a folder of your choice.
   4) **Run the Installer**: Open the extracted folder and double-click setup.exe.
-  5) **Launch**: Enjoy **Catan Companion**! *(Launch the app after setting up the gameboard, but before Player1 selects their first settlement location)*
+  5) **Launch**: Open the folder the files were extracted to and run the `CatanCompanion.exe` executable file.
+  6) **Enjoy!**: *(Launch the app after setting up the gameboard, but before Player1 selects their first settlement location)*
 
 ## Build Info
  - **IDE**: Visual Studio v18.6.1
