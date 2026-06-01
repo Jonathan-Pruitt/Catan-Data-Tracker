@@ -1,6 +1,6 @@
-internal class City : Settlement {
+internal class CityModel : SettlementModel {
 
-        public City(Settlement settlement) 
+        public CityModel(SettlementModel settlement) 
             : base(settlement.HexArray[0], settlement.HexArray[1], settlement.HexArray[2])
         {
             _hexes = settlement.HexArray;

@@ -1,4 +1,4 @@
-﻿using CatanCompanion;
+﻿using CatanCompanion.models;
 using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
@@ -31,11 +31,11 @@ namespace CatanCompanion {
         bool isCatan = false;
         bool isSeafarers = false;
 
-        Player[] players;
+        PlayerModel[] players;
         GameBoard mainBoard;
         Button[] rollButtons = new Button[11];
         Button[] whackedButtons = new Button[6];
-        Player selectedPlayer = null;
+        PlayerModel selectedPlayer = null;
         int turnIndex = 0;
         int pipIndex = 0;
         int[] pipViewArray;
@@ -98,7 +98,7 @@ namespace CatanCompanion {
         private void confirmPlayerCount_Click(object sender,RoutedEventArgs e) {
             int numberOfPlayers = (int)playerCount.Value;
 
-            players = new Player[numberOfPlayers];
+            players = new PlayerModel[numberOfPlayers];
             
             MessageBoxButton confirmation = MessageBoxButton.OKCancel;
             MessageBoxResult result = MessageBox.Show($"{numberOfPlayers} Players", "Do you wish to proceed?", confirmation);
@@ -122,7 +122,7 @@ namespace CatanCompanion {
             int[] ownArray = ParseStringToIntArray(settlementCount.Text);
 
             tempArray = new Location[3];
-            players[turnIndex] = new Player(playerName, turnIndex + 1);
+            players[turnIndex] = new PlayerModel(playerName, turnIndex + 1);
 
             pipViewArray = ownArray;
 
@@ -260,7 +260,7 @@ namespace CatanCompanion {
                 return;
             }
 
-            Settlement settlement = new Settlement(tempArray[0], tempArray[1], tempArray[2]);
+            SettlementModel settlement = new SettlementModel(tempArray[0], tempArray[1], tempArray[2]);
             tempArray = null;
             pipViewArray = null;
             players[turnIndex].AddSettlement(settlement);
@@ -284,7 +284,7 @@ namespace CatanCompanion {
                     //MOVE TO NEXT GAME PHASE
                     viewPlayerStart.Visibility = Visibility.Collapsed;
                     viewMainLoop.Visibility = Visibility.Visible;
-                    foreach (Player player in players) {
+                    foreach (PlayerModel player in players) {
                         player.OpeningSettlements = player.GetSettlements();
                     }
                     InstantiateDispatchTimer();
@@ -563,7 +563,7 @@ namespace CatanCompanion {
                         //PLAYER IS MOVING PIRATE
                     //lblRobber.Content = $"Which player (if any) are you stealing from?";
                     lblRobber.Text = $"Which player (if any) are you stealing from?";
-                    Player[] stealable = new Player[players.Length];
+                    PlayerModel[] stealable = new PlayerModel[players.Length];
                     for (int i = 0; i < players.Length; i++) {
                         if (players[i] == players[turnIndex]) {
                             stealable[i] = null;
@@ -645,7 +645,7 @@ namespace CatanCompanion {
                 //lblRobber.Content = "Select the player you stole from.";
                 lblRobber.Text = "Select the player you stole from.";
 
-                Player[] stealable = GetPlayersByLocation(mainBoard.Blocked);
+                PlayerModel[] stealable = GetPlayersByLocation(mainBoard.Blocked);
                 for (int i = 0; i < stealable.Length; i++) {
 
                     if (stealable[i] == players[turnIndex]) { stealable[i] = null; }
@@ -707,7 +707,7 @@ namespace CatanCompanion {
             }
         }//END METHOD
 
-        private void PopulateListBox(Player[] array, bool getName) {
+        private void PopulateListBox(PlayerModel[] array, bool getName) {
             bool empty = true;
             for (int i = 0; i < array.Length; i++) {
                 if (array[i] != null) {
@@ -721,15 +721,15 @@ namespace CatanCompanion {
         }//END METHOD
 
         
-        private Player[] GetPlayersByLocation(Location target) {
+        private PlayerModel[] GetPlayersByLocation(Location target) {
             int index = 0;
             //Player[] tempPlayers = new Player[testPlayers.Length];
             //foreach (Player player in testPlayers) {
-            Player[] tempPlayers = new Player[players.Length];
-            foreach (Player player in players) {
+            PlayerModel[] tempPlayers = new PlayerModel[players.Length];
+            foreach (PlayerModel player in players) {
                 if (player.IsOnLocation(target)) { tempPlayers[index++] = player; }
             }
-            Player[] foundPlayers = new Player[index];
+            PlayerModel[] foundPlayers = new PlayerModel[index];
             for (int i = 0; i < foundPlayers.Length; i++) {
                 foundPlayers[i] = tempPlayers[i];
             }
@@ -998,7 +998,7 @@ namespace CatanCompanion {
             if (phase == 2) {
                 if (settlement) {
 
-                    Settlement newSettlement = new Settlement(tempArray[0], tempArray[1], tempArray[2]);
+                    SettlementModel newSettlement = new SettlementModel(tempArray[0], tempArray[1], tempArray[2]);
                     players[turnIndex].AddSettlement(newSettlement);
 
                     //lblRobber.Content = $"{players[turnIndex].Name} bought a Settlement";
@@ -1022,7 +1022,7 @@ namespace CatanCompanion {
 
         public void BuyCity(int buyIndex) {
             if (buyIndex == -1) {return; }
-            Settlement chosen = players[turnIndex].GetSettlements()[buyIndex];
+            SettlementModel chosen = players[turnIndex].GetSettlements()[buyIndex];
             players[turnIndex].ConvertSettlementToCity(chosen);
             viewLstBxSelection.Visibility = Visibility.Collapsed;
             lstBxSelection.Items.Clear();
@@ -1073,7 +1073,7 @@ namespace CatanCompanion {
             EnableOptions();
         }//END METHOD
 
-        private void LoseRoad(Player victim) {
+        private void LoseRoad(PlayerModel victim) {
 
             string response = txtPipSelect.Text;
             string validText = "";
@@ -1247,7 +1247,7 @@ namespace CatanCompanion {
             data += "\n\nOPENING DATA, Opening Settlement 1, Opening Settlement 2, Total 'Pips', Opening Resources\n";
 
             for (int i = 0; i < players.Length; i++) {
-                Settlement[] first = players[i].OpeningSettlements;
+                SettlementModel[] first = players[i].OpeningSettlements;
                 string resourcePartA = first[0].GetUniqueResourcesToString();
                 string resourcePartB = first[1].GetUniqueResourcesToString();
                 resourcePartA += resourcePartB;
@@ -1267,7 +1267,7 @@ namespace CatanCompanion {
                 data += $"{players[i].Name},{first[0].GetLocationsToStringSeparatedByPlus()}, {first[1].GetLocationsToStringSeparatedByPlus()}, {first[0].GetPipValue() + first[1].GetPipValue()}, {resources}\n";
             }
 
-            Round[] rnd = mainBoard.Rounds;
+            RoundModel[] rnd = mainBoard.Rounds;
             data += "\n\nROUNDS,";
             for (int i = 0; i < mainBoard.RoundsCount; i++) {
                 if (i < mainBoard.RoundsCount - 1) {

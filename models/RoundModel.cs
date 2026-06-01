@@ -1,22 +1,22 @@
-﻿namespace CatanCompanion {
-    internal class Round {
+﻿namespace CatanCompanion.models {
+    internal class RoundModel {
         //LOG EACH PLAYERS VIC POINTS PER ROUND, WHO IS LONGEST/LARGEST, TOTAL RESOURCES EARNED
 
         /* CONSIDER STORING THE ENTIRE PLAYER AT THIS POINT IF FUTURE ADDITIONAL DATA IS DESIRED */
         /////////////////////
         private TimeSpan _currentGameTime;
         private TimeSpan _roundTime;
-        private Player _longestPlayer;
-        private Player[] _tiedLongest;
-        private Player _largestPlayer;
-        private Player[] _tiedLargest;
-        private Player _vicPointLeader;
-        private Player[] _tiedPointLead;
+        private PlayerModel _longestPlayer;
+        private PlayerModel[] _tiedLongest;
+        private PlayerModel _largestPlayer;
+        private PlayerModel[] _tiedLargest;
+        private PlayerModel _vicPointLeader;
+        private PlayerModel[] _tiedPointLead;
         private int _longRoadCount;
         private int _largeArmyCount;
         private int _vicPountCount;
 
-        public Round(Player[] players, TimeSpan gameTime, TimeSpan roundTime) {
+        public RoundModel(PlayerModel[] players, TimeSpan gameTime, TimeSpan roundTime) {
             _currentGameTime = gameTime;
             _roundTime = roundTime;
 
@@ -37,21 +37,21 @@
             get { return _roundTime; } 
         }
 
-        public Player[] LongestRoad {
+        public PlayerModel[] LongestRoad {
             get { 
-                return _longestPlayer != null ? new Player[]{_longestPlayer } : _tiedLongest;
+                return _longestPlayer != null ? new PlayerModel[]{_longestPlayer } : _tiedLongest;
             }
         }
 
-        public Player[] LargestArmy {
+        public PlayerModel[] LargestArmy {
             get { 
-                return _largestPlayer != null ? new Player[]{_largestPlayer } : _tiedLargest;
+                return _largestPlayer != null ? new PlayerModel[]{_largestPlayer } : _tiedLargest;
             }
         }
 
-        public Player[] PointLeader {
+        public PlayerModel[] PointLeader {
             get { 
-                return _vicPointLeader != null ? new Player[]{_vicPointLeader } : _tiedPointLead;
+                return _vicPointLeader != null ? new PlayerModel[]{_vicPointLeader } : _tiedPointLead;
             }
         }
 
@@ -69,9 +69,9 @@
 
         #endregion
 
-        private void SetLongest(Player[] _players) {
+        private void SetLongest(PlayerModel[] _players) {
             int longestFound = 0;
-            Player longestPlayer = CheckLongest(_players, out longestFound);
+            PlayerModel longestPlayer = CheckLongest(_players, out longestFound);
             _longRoadCount = longestFound;
 
             if (longestPlayer != null) {
@@ -84,7 +84,7 @@
                     }
                 }//END LOOP
                 
-                Player[] longBoys = new Player[index];
+                PlayerModel[] longBoys = new PlayerModel[index];
                 index = 0;
                 for (int i = 0; i < _players.Length;i++) {
                     if (_players[i].LongestRoad == longestFound) {
@@ -94,9 +94,9 @@
                 _tiedLongest = longBoys;
             }//END IF
         }//END METHOD
-        private Player CheckLongest(Player[] _players, out int longest) {
+        private PlayerModel CheckLongest(PlayerModel[] _players, out int longest) {
             longest = 0;
-            foreach (Player player in _players) {
+            foreach (PlayerModel player in _players) {
                 if (player.HasLongestRoad) {
                     longest = player.LongestRoad;
                     return player;
@@ -104,7 +104,7 @@
             }//END LOOP
             bool isTied = false;
             
-            Player p = null;
+            PlayerModel p = null;
             for (int i = 0; i < _players.Length; i++) {
                 if (_players[i].LongestRoad > longest) {
                     isTied = false;
@@ -117,9 +117,9 @@
             return isTied ? null : p;
         }//END METHOD
 
-        private void SetLargest(Player[] _players) {
+        private void SetLargest(PlayerModel[] _players) {
             int largestFound;
-            Player largestPlayer = CheckLargest(_players, out largestFound);
+            PlayerModel largestPlayer = CheckLargest(_players, out largestFound);
             _largeArmyCount = largestFound;
 
             if (largestPlayer != null) {
@@ -132,7 +132,7 @@
                     }
                 }//END LOOP
                 
-                Player[] largeBoys = new Player[index];
+                PlayerModel[] largeBoys = new PlayerModel[index];
                 index = 0;
                 for (int i = 0; i < _players.Length;i++) {
                     if (_players[i].Knight == largestFound) {
@@ -142,9 +142,9 @@
                 _tiedLargest = largeBoys;
             }//END IF
         }//END METHOD
-        private Player CheckLargest(Player[] _players, out int largest) {
+        private PlayerModel CheckLargest(PlayerModel[] _players, out int largest) {
             largest = 0;
-            foreach (Player player in _players) {
+            foreach (PlayerModel player in _players) {
                 if (player.HasLargestArmy) {
                     largest = player.Knight;
                     return player;
@@ -152,7 +152,7 @@
             }//END LOOP
             bool isTied = false;
             
-            Player p = null;
+            PlayerModel p = null;
             for (int i = 0; i < _players.Length; i++) {
                 if (_players[i].Knight > largest) {
                     isTied = false;
@@ -165,9 +165,9 @@
             return isTied ? null : p;
         }//END METHOD
 
-        private void SetLeader(Player[] _players) {
+        private void SetLeader(PlayerModel[] _players) {
             int topVP;
-            Player leader = CheckLeader(_players, out topVP);
+            PlayerModel leader = CheckLeader(_players, out topVP);
             _vicPountCount = topVP;
 
             if (leader != null) {
@@ -179,7 +179,7 @@
                         index++;
                     }
                 }//END LOOP
-                Player[] leadBoys = new Player[index];
+                PlayerModel[] leadBoys = new PlayerModel[index];
                 index = 0;
                 for (int i = 0; i < _players.Length;i++) {
                     if (_players[i].VictoryPoints == topVP) {
@@ -189,12 +189,12 @@
                 _tiedPointLead = leadBoys;
             }//END IF
         }//END METHOD
-        private Player CheckLeader(Player[] _players, out int highest) {
+        private PlayerModel CheckLeader(PlayerModel[] _players, out int highest) {
             highest = 0;
             
             bool isTied = false;
             
-            Player p = null;
+            PlayerModel p = null;
             for (int i = 0; i < _players.Length; i++) {
                 if (_players[i].VictoryPoints > highest) {
                     isTied = false;

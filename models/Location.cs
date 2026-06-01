@@ -1,3 +1,14 @@
+internal class HexModel
+{
+    public string Id { get; set; }
+
+    // ACCEPTABLE VALUES 2 - 6, 8 - 12
+    public string Token { get; set; }
+
+    // ACCEPTABLE VALUES (wheat, wood, sheep, ore, brick, gold)
+    public string Resource { get; set; }
+}
+
 internal class Location {
     private int _tokenNum; 
     private string _resource;

@@ -1,8 +1,19 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
 
-namespace CatanCompanion {
-    internal class Player {
+namespace CatanCompanion.models {
+    internal class PlayerModel
+    {
+        public string Name { get; set; }
+        public SettlementModel[] Settlements { get; set; }
+        public CityModel[] Cities { get; set; }
+
+        public PlayerModel(string name)
+        {
+            Name = name;
+        }
+    }
+    internal class PlayerModelx {
         private string _name;
         private bool _hasLargestArmy = false;
         private bool _hasLongestRoad = false;
@@ -28,13 +39,13 @@ namespace CatanCompanion {
         private string _robberActivity = ""; //"Miles stole from Jackie\n" (if a card wasn't stolen, have a void and say "Miles blocked Jackie with robber")
         private string _knightActivity = ""; //"Miles knighted Jackie\n" (if a card wasn't stolen, have a void and say "Miles blocked Jackie with knight")
         private TimeSpan[] _turnTimes;   
-        private Settlement[] _settlementObjects;
-        private Settlement[] _openingSettlements;
-        private City[] _cityObjects;
+        private SettlementModel[] _settlementObjects;
+        private SettlementModel[] _openingSettlements;
+        private CityModel[] _cityObjects;
 
 #region CONSTRUCTORS
 
-        public Player(string name, int turn) {
+        public PlayerModel(string name, int turn) {
             _name = name;
             _turnInGame = turn;
         }
@@ -65,9 +76,9 @@ namespace CatanCompanion {
         }//END METHOD
 
 
-        public void AddSettlement(Settlement newSettlement) {
+        public void AddSettlement(SettlementModel newSettlement) {
             if (_settlementObjects != null) {
-                Settlement[] updatedSettlements = new Settlement[_settlementObjects.Length + 1];
+                SettlementModel[] updatedSettlements = new SettlementModel[_settlementObjects.Length + 1];
                 int index = 0;
                 while (index < _settlementObjects.Length) {
                     updatedSettlements[index] = _settlementObjects[index++];
@@ -75,13 +86,13 @@ namespace CatanCompanion {
                 updatedSettlements[index] = newSettlement;
                 _settlementObjects = updatedSettlements;
             } else {
-                _settlementObjects = new Settlement[1] {newSettlement };
+                _settlementObjects = new SettlementModel[1] {newSettlement };
             }
         }//END METHOD
 
         public void ReduceSettlements() {
             int index = 0;
-            Settlement[] newSettles;
+            SettlementModel[] newSettles;
             if (_settlementObjects == null) {return;}
 
             for (int i = 0; i < _settlementObjects.Length; i++) {
@@ -89,7 +100,7 @@ namespace CatanCompanion {
                     index++;
                 }
             }
-            newSettles = new Settlement[index];
+            newSettles = new SettlementModel[index];
             index = 0;
             for (int i = 0; i < _settlementObjects.Length; i++) {
                 if (_settlementObjects[i] != null) {
@@ -98,9 +109,9 @@ namespace CatanCompanion {
             }
             _settlementObjects = newSettles;
         }
-        public void AddCity(City newCity) {
+        public void AddCity(CityModel newCity) {
             if (_cityObjects != null) {
-                City[] updatedCity = new City[_cityObjects.Length + 1];
+                CityModel[] updatedCity = new CityModel[_cityObjects.Length + 1];
                 int index = 0;
                 while (index < _cityObjects.Length) {
                     updatedCity[index] = _cityObjects[index++];
@@ -108,21 +119,21 @@ namespace CatanCompanion {
                 updatedCity[index] = newCity;
                 _cityObjects = updatedCity;
             } else {
-                _cityObjects = new City[1] {newCity};
+                _cityObjects = new CityModel[1] {newCity};
             }
             ReduceSettlements();
         }//END METHOD
 
         public bool IsOnLocation(Location target) {
             if (_settlementObjects != null) {
-                foreach (Settlement settlement in _settlementObjects) {
+                foreach (SettlementModel settlement in _settlementObjects) {
                     if (settlement != null) {
                         if (settlement.HasLocation(target)) return true;
                     }
                 }
             }
             if (_cityObjects != null) {
-                foreach (City city in _cityObjects) {
+                foreach (CityModel city in _cityObjects) {
                     if (city.HasLocation(target)) return true;
                 }
             }
@@ -183,10 +194,10 @@ namespace CatanCompanion {
             return output;
         }//END METHOD
 
-        public Settlement[] GetSettlements() {
+        public SettlementModel[] GetSettlements() {
             if (_settlementObjects == null) {return null; }
 
-            Settlement[] settlements = new Settlement[_settlementObjects.Length];
+            SettlementModel[] settlements = new SettlementModel[_settlementObjects.Length];
             for (int i = 0; i < settlements.Length; i++) {
                 settlements[i] = _settlementObjects[i];
             }
@@ -197,17 +208,17 @@ namespace CatanCompanion {
             if (_settlementObjects == null) {return null; }
 
             string[] settlementData = new string[_settlementObjects.Length];
-            Settlement[] spots = GetSettlements();
+            SettlementModel[] spots = GetSettlements();
             for (int i = 0; i < settlementData.Length; i++) {
                 settlementData[i] = spots[i].GetLocationsToString();
             }
             return settlementData;
         }//END METHOD
 
-        public City[] GetCities() {
+        public CityModel[] GetCities() {
             if (_cityObjects == null) {return null;}
 
-            City[] cities = new City[_cityObjects.Length];
+            CityModel[] cities = new CityModel[_cityObjects.Length];
             for (int i = 0; i < cities.Length; i++) {
                 cities[i] = _cityObjects[i];
             }
@@ -218,29 +229,29 @@ namespace CatanCompanion {
             if (_cityObjects == null) {return null; }
 
             string[] cityNames = new string[_cityObjects.Length];
-            City[] spots = GetCities();
+            CityModel[] spots = GetCities();
             for (int i = 0; i < cityNames.Length; i++) {
                 cityNames[i] = spots[i].GetLocationsToString();
             }
             return cityNames;
         }//END METHOD
 
-        public void ConvertSettlementToCity(Settlement settlement) {
+        public void ConvertSettlementToCity(SettlementModel settlement) {
             if (_settlementObjects == null) {return;}
 
             if (_settlementObjects.Length > 1) {
-                Settlement[] newArray = new Settlement[_settlementObjects.Length - 1];
+                SettlementModel[] newArray = new SettlementModel[_settlementObjects.Length - 1];
                 int index = 0;
                 for (int i = 0; i < _settlementObjects.Length; i++) {
                     if (_settlementObjects[i] != settlement) {
                         newArray[index++] = _settlementObjects[i];
                     }
                 }
-                City newCity = new City(settlement);
+                CityModel newCity = new CityModel(settlement);
                 _settlementObjects = newArray;
                 AddCity(newCity);
             } else {                
-                City city = new City(settlement);
+                CityModel city = new CityModel(settlement);
                 _settlementObjects = null;
                 AddCity(city);
                 return;
@@ -351,7 +362,7 @@ namespace CatanCompanion {
             get {return _isWinner; } set { _isWinner = value; }
         }
 
-        public Settlement[] OpeningSettlements {
+        public SettlementModel[] OpeningSettlements {
             get {return _openingSettlements; } set { _openingSettlements = value; }
         }
 

@@ -1,7 +1,7 @@
-internal class Settlement {
+internal class SettlementModel {
     protected Location[] _hexes = new Location[3];
 
-    public Settlement(Location location1, Location location2 = null, Location location3 = null) {
+    public SettlementModel(Location location1, Location location2 = null, Location location3 = null) {
         _hexes[0] = location1;
         _hexes[1] = location2;
         _hexes[2] = location3;

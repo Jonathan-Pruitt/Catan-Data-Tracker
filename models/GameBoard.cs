@@ -1,6 +1,6 @@
 ﻿using System.Diagnostics;
 
-namespace CatanCompanion {
+namespace CatanCompanion.models {
     internal class GameBoard {
         private int _gameType = 0; //0-Standard ; 1- Seafarers
 
@@ -10,10 +10,10 @@ namespace CatanCompanion {
         private string _blockedResource = "";
         private Stopwatch _gameClock = new Stopwatch();
         private Stopwatch _turnClock = new Stopwatch();        
-        private Player _hasLargestArmy;
-        private Player _hasLongestRoad;
-        private Player _winner;
-        private Round[] _rounds;
+        private PlayerModel _hasLargestArmy;
+        private PlayerModel _hasLongestRoad;
+        private PlayerModel _winner;
+        private RoundModel[] _rounds;
 
         private Location[] _hexArray;
         private Location _blockedLocation;
@@ -82,7 +82,7 @@ namespace CatanCompanion {
             }
         }
 
-        public Round[] Rounds { get { return _rounds; } }
+        public RoundModel[] Rounds { get { return _rounds; } }
 
         public int RoundsCount { get { return _rounds != null ? _rounds.Length : 0; } }
         
@@ -94,22 +94,22 @@ namespace CatanCompanion {
             get {return _turnClock; } 
         }
 
-        public Player Winner {
+        public PlayerModel Winner {
             get {return _winner; } set {_winner = value;} 
         }
 
-        public void AddRound(Player[] players, TimeSpan gameTime) {
+        public void AddRound(PlayerModel[] players, TimeSpan gameTime) {
             if (_rounds != null) {
-                Round[] update = new Round[_rounds.Length + 1];
+                RoundModel[] update = new RoundModel[_rounds.Length + 1];
                 int index = 0;
                 while (index < _rounds.Length) {
                     update[index] = _rounds[index];
                     index++;
                 }//END LOOP
-                update[index] = new Round(players, gameTime, gameTime - _rounds[index - 1].GameTime);
+                update[index] = new RoundModel(players, gameTime, gameTime - _rounds[index - 1].GameTime);
                 _rounds = update;
             } else {
-                _rounds = new Round[]{new Round(players, gameTime, gameTime)};
+                _rounds = new RoundModel[]{new RoundModel(players, gameTime, gameTime)};
             }
         }//END METHOD
 
@@ -219,11 +219,11 @@ namespace CatanCompanion {
             get { return _blockedResource;} set { _blockedResource = value; }
         }
 
-        public Player LargestArmy {
+        public PlayerModel LargestArmy {
             get { return _hasLargestArmy; } set { _hasLargestArmy = value; }
         }
 
-        public Player LongestRoad {
+        public PlayerModel LongestRoad {
             get { return _hasLongestRoad; } set { _hasLongestRoad = value; }
         }
 
